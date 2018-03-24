@@ -16,7 +16,7 @@ import lombok.Data;
 public class Person {
 
   @Id
-  private Long id;
+  private String uuid;
   private String nickname;
   private String email;
 

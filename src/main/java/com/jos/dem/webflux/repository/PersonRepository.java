@@ -4,6 +4,5 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import com.jos.dem.webflux.model.Person;
 
-interface PersonRepository extends ReactiveMongoRepository<Person, String> {
-
+public interface PersonRepository extends ReactiveMongoRepository<Person, String> {
 }
