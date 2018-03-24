@@ -1,16 +1,17 @@
-package com.jos.dem.webflux;
+package com.jos.dem.webflux.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstuctor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.Data;
 
 @Document
-@AllArgsContructor
+@AllArgsConstructor
 @ToString
-@NoArgsConstuctor
+@NoArgsConstructor
 @Data
 public class Person {
 
