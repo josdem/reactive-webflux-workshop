@@ -23,8 +23,7 @@ public class PersonApplication {
     return args -> {
       Stream.of("josdem", "tgrip", "edzero", "skuarch", "siedrix")
       .map(nickname -> new Person(UUID.randomUUID().toString(), nickname, nickname + "@email.com"))
-      .map(personRepository::save)
-      .forEach(System.out::println);
+      .map(personRepository::save);
     };
   }
 
