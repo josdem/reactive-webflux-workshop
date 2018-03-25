@@ -5,6 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import reactor.core.publisher.Flux;
+
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -24,6 +26,9 @@ public class PersonApplication {
       Stream.of("josdem", "tgrip", "edzero", "skuarch", "siedrix")
       .map(nickname -> new Person(UUID.randomUUID().toString(), nickname, nickname + "@email.com"))
       .map(personRepository::save);
+
+      Flux<Person> persons = personRepository.findAll();
+      persons.collectList().block().forEach(System.out::println);
     };
   }
 
