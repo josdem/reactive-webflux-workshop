@@ -25,10 +25,8 @@ public class PersonApplication {
     return args -> {
       Stream.of("josdem", "tgrip", "edzero", "skuarch", "siedrix")
       .map(nickname -> new Person(UUID.randomUUID().toString(), nickname, nickname + "@email.com"))
-      .map(personRepository::save);
-
-      Flux<Person> persons = personRepository.findAll();
-      persons.collectList().block().forEach(System.out::println);
+      .map(person -> personRepository.save(person))
+      .subscribe(null, null, () -> personRepository.findAll().subscribe(System.out::println));
     };
   }
 
