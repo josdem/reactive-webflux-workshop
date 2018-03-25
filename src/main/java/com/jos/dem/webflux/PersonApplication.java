@@ -23,6 +23,8 @@ public class PersonApplication {
   @Bean
   CommandLineRunner start(PersonRepository personRepository){
     return args -> {
+      personRepository.deleteAll().subscribe();
+
       Stream.of("josdem", "tgrip", "edzero", "skuarch", "siedrix")
       .map(nickname -> new Person(UUID.randomUUID().toString(), nickname, nickname + "@email.com"))
       .forEach(person -> personRepository.save(person).subscribe());
