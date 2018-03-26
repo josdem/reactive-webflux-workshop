@@ -22,7 +22,9 @@ public class WebConfig {
   public RouterFunction<ServerResponse> routes(){
     return RouterFunctions
       .route(GET("/persons"),
-      serverRequest -> ServerResponse.ok().body(personRepository.findAll(), Person.class));
+      request -> ServerResponse.ok().body(personRepository.findAll(), Person.class))
+      .andRoute(GET("/persons/{id}"), 
+      request -> ServerResponse.ok().body(personRepository.findById(request.pathVariable("id")), Person.class));
   }
 
 }
