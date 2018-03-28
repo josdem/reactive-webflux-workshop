@@ -14,3 +14,4 @@ gradle bootRun
 
 * http://josdem.io/techtalk/spring/spring_webflux_basics/
 * http://josdem.io/techtalk/spring/spring_webflux_router/
+* http://josdem.io/techtalk/spring/spring_webflux_client/
