@@ -17,17 +17,14 @@ public class PersonApplication {
 
   @Bean
   WebClient webClient() {
-    return WebClient
-      .create("http://localhost:8080/persons")
-      .build();
+    return WebClient.create("http://localhost:8080/persons");
   }
 
   @Bean
   CommandLineRunner run(WebClient client){
     return args -> {
-      client.get().uri("").exchange()
-        .flatMap(clientResponse ->
-            clientResponse.bodyToFlux(Person.class))
+      client.get().uri("").retrieve()
+        .bodyToFlux(Person.class)
         .subscribe(System.out::println);
     };
   }
