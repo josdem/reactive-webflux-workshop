@@ -4,18 +4,31 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.jos.dem.webflux.model.Person;
 
 @SpringBootApplication
 public class PersonApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PersonApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(PersonApplication.class, args);
+  }
 
   @Bean
-  CommandLineRunner run(){
+  WebClient webClient() {
+    return WebClient
+      .create("http://localhost:8080/persons")
+      .build();
+  }
+
+  @Bean
+  CommandLineRunner run(WebClient client){
     return args -> {
-      System.out.println("Hello World!");
+      client.get().uri("").exchange()
+        .flatMap(clientResponse ->
+            clientResponse.bodyToFlux(Person.class))
+        .subscribe(System.out::println);
     };
   }
 
