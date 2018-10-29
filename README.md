@@ -4,14 +4,20 @@ Reactive Webflux Workshop
 This project shows how to implement reactive web using Spring Webflux.
 
 
-#### To run the project
+#### To run the project with Gradle
 
 ```bash
 gradle bootRun
 ```
 
+#### To run the project with Maven
+
+```bash
+mvn spring-boot:run
+```
+
 #### Read this as reference
 
-* http://josdem.io/techtalk/spring/spring_webflux_basics/
-* http://josdem.io/techtalk/spring/spring_webflux_router/
-* http://josdem.io/techtalk/spring/spring_webflux_client/
+* https://josdem.io/techtalk/spring/spring_webflux_basics/
+* https://josdem.io/techtalk/spring/spring_webflux_router/
+* https://josdem.io/techtalk/spring/spring_webflux_client/
