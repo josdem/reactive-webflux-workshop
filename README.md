@@ -19,5 +19,5 @@ mvn spring-boot:run
 #### Read this as reference
 
 * https://josdem.io/techtalk/spring/spring_webflux_basics/
-* https://josdem.io/techtalk/spring/spring_webflux_router/
+* https://josdem.io/techtalk/spring/spring_webflux_server/
 * https://josdem.io/techtalk/spring/spring_webflux_client/
