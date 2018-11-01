@@ -9,8 +9,8 @@ import lombok.AllArgsConstructor;
 
 @Data
 @Document
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Person {
 
   @Id
