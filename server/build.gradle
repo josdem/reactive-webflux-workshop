@@ -1,22 +1,21 @@
-buildscript {
-  ext {
-    springBootVersion = '2.1.0.RELEASE'
-  }
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-  }
+plugins {
+  id 'org.springframework.boot' version '2.1.5.RELEASE'
+  id 'java'
 }
 
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
+def junitJupiterVersion = '5.4.2'
+
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.jos.dem.webflux'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = 11
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
 
 repositories {
 	mavenCentral()
@@ -24,7 +23,8 @@ repositories {
 
 dependencies {
   implementation('org.springframework.boot:spring-boot-starter-webflux')
-  implementation('org.projectlombok:lombok:1.18.2')
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
   implementation('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
   testImplementation('org.springframework.boot:spring-boot-starter-test')
   testImplementation('io.projectreactor:reactor-test')
