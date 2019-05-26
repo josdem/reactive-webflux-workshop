@@ -25,9 +25,12 @@ public class PersonApplication {
     return args -> {
       personRepository.deleteAll().subscribe();
 
-      Stream.of("josdem", "tgrip", "edzero", "skuarch", "siedrix")
-      .map(nickname -> new Person(UUID.randomUUID().toString(), nickname, nickname + "@email.com"))
-      .forEach(person -> personRepository.save(person).subscribe());
+      Flux.just(
+          new Person(UUID.randomUUID(), "josdem", "joseluis.delacruz@gmail.com"),
+          new Person(UUID.randomUUID(), "tgrip", "tgrip@email.com"),
+          new Person(UUID.randomUUID(), "edzero", "edzero@email.com"))
+        .flatMap(person -> personRepository.save(person))
+        .subscribe();
 
       personRepository.findAll().log().subscribe(System.out::println);
     };
