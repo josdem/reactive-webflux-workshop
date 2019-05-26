@@ -13,12 +13,17 @@ import java.util.stream.Stream;
 import com.jos.dem.webflux.model.Person;
 import com.jos.dem.webflux.repository.PersonRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SpringBootApplication
 public class PersonApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PersonApplication.class, args);
-	}
+  private Logger log = LoggerFactory.getLogger(this.getClass());
+
+  public static void main(String[] args) {
+    SpringApplication.run(PersonApplication.class, args);
+  }
 
   @Bean
   CommandLineRunner start(PersonRepository personRepository){
@@ -32,7 +37,7 @@ public class PersonApplication {
         .flatMap(person -> personRepository.save(person))
         .subscribe();
 
-      personRepository.findAll().log().subscribe(System.out::println);
+      personRepository.findAll().log().subscribe(person -> log.info("person {}", person));
     };
   }
 
