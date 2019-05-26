@@ -28,16 +28,17 @@ public class PersonApplication {
   @Bean
   CommandLineRunner start(PersonRepository personRepository){
     return args -> {
-      personRepository.deleteAll().subscribe();
 
       Flux.just(
           new Person(UUID.randomUUID(), "josdem", "joseluis.delacruz@gmail.com"),
           new Person(UUID.randomUUID(), "tgrip", "tgrip@email.com"),
-          new Person(UUID.randomUUID(), "edzero", "edzero@email.com"))
-        .flatMap(person -> personRepository.save(person))
-        .subscribe();
+          new Person(UUID.randomUUID(), "edzero", "edzero@email.com"),
+          new Person(UUID.randomUUID(), "siedrix", "siedrix@email.com"),
+          new Person(UUID.randomUUID(), "mkheck", "mkheck@email.com"))
+        .flatMap(personRepository::save)
+        .subscribe(person -> log.info("person: {}", person));
 
-      personRepository.findAll().log().subscribe(person -> log.info("person {}", person));
+      personRepository.deleteAll().subscribe();
     };
   }
 
