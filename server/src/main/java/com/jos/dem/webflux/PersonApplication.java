@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import reactor.core.publisher.Flux;
 
-import java.util.UUID;
 import java.util.stream.Stream;
 
 import org.springframework.util.AlternativeJdkIdGenerator;
@@ -23,8 +22,6 @@ public class PersonApplication {
 
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
-  private AlternativeJdkIdGenerator idGenerator = new AlternativeJdkIdGenerator();
-
   public static void main(String[] args) {
     SpringApplication.run(PersonApplication.class, args);
   }
@@ -34,15 +31,13 @@ public class PersonApplication {
     return args -> {
 
       Flux.just(
-          new Person(idGenerator.generateId(), "josdem", "joseluis.delacruz@gmail.com"),
-          new Person(idGenerator.generateId(), "tgrip", "tgrip@email.com"),
-          new Person(idGenerator.generateId(), "edzero", "edzero@email.com"),
-          new Person(idGenerator.generateId(), "siedrix", "siedrix@email.com"),
-          new Person(idGenerator.generateId(), "mkheck", "mkheck@email.com"))
+          new Person("josdem", "joseluis.delacruz@gmail.com"),
+          new Person("tgrip", "tgrip@email.com"),
+          new Person("edzero", "edzero@email.com"),
+          new Person("siedrix", "siedrix@email.com"),
+          new Person("mkheck", "mkheck@email.com"))
         .flatMap(personRepository::save)
         .subscribe(person -> log.info("person: {}", person));
-
-      personRepository.deleteAll().subscribe();
 
     };
   }
