@@ -1,5 +1,7 @@
 package com.jos.dem.webflux.controller;
 
+import java.util.UUID;
+
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
@@ -31,7 +33,7 @@ public class PersonController {
   @GetMapping("/persons/{id}")
   public Mono<Person> findById(@PathVariable String id){
     log.info("Calling find person by id: " + id);
-    return personRepository.findById(id);
+    return personRepository.findById(UUID.fromString(id));
   }
 
 }

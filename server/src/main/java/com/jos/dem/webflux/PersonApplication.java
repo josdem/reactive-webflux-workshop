@@ -10,6 +10,8 @@ import reactor.core.publisher.Flux;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import org.springframework.util.AlternativeJdkIdGenerator;
+
 import com.jos.dem.webflux.model.Person;
 import com.jos.dem.webflux.repository.PersonRepository;
 
@@ -21,6 +23,8 @@ public class PersonApplication {
 
   private Logger log = LoggerFactory.getLogger(this.getClass());
 
+  private AlternativeJdkIdGenerator idGenerator = new AlternativeJdkIdGenerator();
+
   public static void main(String[] args) {
     SpringApplication.run(PersonApplication.class, args);
   }
@@ -30,15 +34,16 @@ public class PersonApplication {
     return args -> {
 
       Flux.just(
-          new Person(UUID.randomUUID(), "josdem", "joseluis.delacruz@gmail.com"),
-          new Person(UUID.randomUUID(), "tgrip", "tgrip@email.com"),
-          new Person(UUID.randomUUID(), "edzero", "edzero@email.com"),
-          new Person(UUID.randomUUID(), "siedrix", "siedrix@email.com"),
-          new Person(UUID.randomUUID(), "mkheck", "mkheck@email.com"))
+          new Person(idGenerator.generateId(), "josdem", "joseluis.delacruz@gmail.com"),
+          new Person(idGenerator.generateId(), "tgrip", "tgrip@email.com"),
+          new Person(idGenerator.generateId(), "edzero", "edzero@email.com"),
+          new Person(idGenerator.generateId(), "siedrix", "siedrix@email.com"),
+          new Person(idGenerator.generateId(), "mkheck", "mkheck@email.com"))
         .flatMap(personRepository::save)
         .subscribe(person -> log.info("person: {}", person));
 
       personRepository.deleteAll().subscribe();
+
     };
   }
 
