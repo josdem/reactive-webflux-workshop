@@ -30,10 +30,10 @@ public class PersonController {
     return personRepository.findAll();
   }
 
-  @GetMapping("/persons/{id}")
-  public Mono<Person> findById(@PathVariable String id){
-    log.info("Calling find person by id: " + id);
-    return personRepository.findById(UUID.fromString(id));
+  @GetMapping("/persons/{nickname}")
+  public Mono<Person> findById(@PathVariable String nickname){
+    log.info("Calling find person by id: {}" nickname);
+    return personRepository.findByNickname(nickname);
   }
 
 }
