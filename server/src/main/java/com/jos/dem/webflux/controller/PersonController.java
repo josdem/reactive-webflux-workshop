@@ -32,8 +32,8 @@ public class PersonController {
 
   @GetMapping("/persons/{nickname}")
   public Mono<Person> findById(@PathVariable String nickname){
-    log.info("Calling find person by id: {}" nickname);
-    return personRepository.findByNickname(nickname);
+    log.info("Calling find person by id: {}", nickname);
+    return personRepository.findById(nickname);
   }
 
 }
