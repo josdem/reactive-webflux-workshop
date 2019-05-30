@@ -30,7 +30,7 @@ public class PersonApplication {
     return args -> {
       client.get().uri("/persons").retrieve()
         .bodyToFlux(Person.class)
-        .subscribe(person -> log.info("person: {}", person.toString()));
+        .subscribe(person -> log.info("person: {}", person));
     };
   }
 
