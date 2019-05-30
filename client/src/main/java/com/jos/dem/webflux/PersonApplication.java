@@ -8,8 +8,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.jos.dem.webflux.model.Person;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SpringBootApplication
 public class PersonApplication {
+
+  private Logger log = LoggerFactory.getLogger(this.getClass());
 
   public static void main(String[] args) {
     SpringApplication.run(PersonApplication.class, args);
@@ -17,15 +22,15 @@ public class PersonApplication {
 
   @Bean
   WebClient webClient() {
-    return WebClient.create("http://localhost:8080/persons");
+    return WebClient.create("http://localhost:8080");
   }
 
   @Bean
   CommandLineRunner run(WebClient client){
     return args -> {
-      client.get().uri("").retrieve()
+      client.get().uri("/persons").retrieve()
         .bodyToFlux(Person.class)
-        .subscribe(System.out::println);
+        .subscribe(person -> log.info("person: {}", person));
     };
   }
 
