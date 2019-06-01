@@ -32,4 +32,13 @@ public class PersonControllerTest {
       .expectBodyList(Person.class);
   }
 
+  @Test
+  public void shouldGetPerson() throws Exception {
+    webClient.get().uri("/persons/{nickname}", "josdem").accept(APPLICATION_JSON)
+      .exchange()
+      .expectStatus().isOk()
+      .expectHeader().contentType(APPLICATION_JSON_UTF8)
+      .expectBody(Person.class);
+  }
+
 }
