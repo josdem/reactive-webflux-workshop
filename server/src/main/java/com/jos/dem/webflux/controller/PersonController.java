@@ -11,27 +11,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.jos.dem.webflux.model.Person;
 import com.jos.dem.webflux.repository.PersonRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 public class PersonController {
 
-  private Logger log = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private PersonRepository personRepository;
 
-  @Autowired
-  private PersonRepository personRepository;
+    @GetMapping("/persons")
+    public Flux<Person> findAll() {
+        log.info("Calling find persons");
+        return personRepository.findAll();
+    }
 
-  @GetMapping("/persons")
-  public Flux<Person> findAll(){
-    log.info("Calling find persons");
-    return personRepository.findAll();
-  }
-
-  @GetMapping("/persons/{nickname}")
-  public Mono<Person> findById(@PathVariable String nickname){
-    log.info("Calling find person by id: {}", nickname);
-    return personRepository.findById(nickname);
-  }
+    @GetMapping("/persons/{nickname}")
+    public Mono<Person> findById(@PathVariable String nickname) {
+        log.info("Calling find person by id: {}", nickname);
+        return personRepository.findById(nickname);
+    }
 
 }
