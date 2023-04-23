@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Person {
 
-  private String nickname;
-  private String email;
+    private String nickname;
+    private String email;
 
 }
